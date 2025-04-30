@@ -46,6 +46,7 @@
             color: white;
             border: none;
             cursor: pointer;
+            margin: 5px;
         }
 
         button:hover {
@@ -92,6 +93,7 @@
     <input type="text" id="discordId" placeholder="Digite o ID do Discord">
     <input type="text" id="rumo" placeholder="Digite o rumo">
     <button onclick="gerarRumo()">Gerar</button>
+    <button id="copiarBtn" onclick="copiarResultado()" disabled>Copiar</button>
     <div id="resultado"></div>
 
     <footer>
@@ -106,8 +108,22 @@
             if (discordId && rumo) {
                 const resultado = `${discordId} | <@${discordId}> - ${rumo}`;
                 document.getElementById('resultado').innerText = resultado;
+
+                // Habilitar o botão de copiar
+                document.getElementById('copiarBtn').disabled = false;
             } else {
                 alert('Por favor, preencha ambos os campos!');
+            }
+        }
+
+        function copiarResultado() {
+            const resultado = document.getElementById('resultado').innerText;
+            if (resultado) {
+                navigator.clipboard.writeText(resultado).then(() => {
+                    alert('Texto copiado para a área de transferência!');
+                }).catch(err => {
+                    alert('Erro ao copiar texto: ' + err);
+                });
             }
         }
 
