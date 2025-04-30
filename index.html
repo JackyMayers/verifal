@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Rumo</title>
+    <link rel="icon" href="https://i.postimg.cc/MG7qzW4x/emote.png" type="image/x-icon">
+    <style>
+        :root {
+            --background-color: #ffffff;
+            --text-color: #000000;
+            --button-color: #007BFF;
+            --button-hover-color: #0056b3;
+            --footer-color: #555;
+        }
+
+        body.dark-mode {
+            --background-color: #1e1e1e;
+            --text-color: #ffffff;
+            --button-color: #4CAF50;
+            --button-hover-color: #45a049;
+            --footer-color: #888;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        input {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            border: 1px solid var(--text-color);
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: var(--button-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: var(--button-hover-color);
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: var(--footer-color);
+        }
+
+        footer img {
+            margin-top: 20px;
+        }
+
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .toggle-container label {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="toggle-container">
+        <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()" checked>
+        <label for="darkModeToggle">Modo Escuro</label>
+    </div>
+
+    <h1>Gerador de Rumo</h1>
+    <p>Insira o ID do Discord e o rumo desejado:</p>
+    <input type="text" id="discordId" placeholder="Digite o ID do Discord">
+    <input type="text" id="rumo" placeholder="Digite o rumo">
+    <button onclick="gerarRumo()">Gerar</button>
+    <div id="resultado"></div>
+
+    <footer>
+        <img src="https://i.postimg.cc/WzSNyqxY/Jacky-Confuso.png" alt="Placeholder Image" width="150">
+        <p>© 2025 - Todos os direitos reservados. Feito com ❤, ajuda de IA e um pouquinho de preguiça por <a href="https://jackymayers.github.io/" target="_blank">Jacky Mayers</a> !</p>
+    </footer>
+
+    <script>
+        function gerarRumo() {
+            const discordId = document.getElementById('discordId').value;
+            const rumo = document.getElementById('rumo').value;
+            if (discordId && rumo) {
+                const resultado = `${discordId} | <@${discordId}> - ${rumo}`;
+                document.getElementById('resultado').innerText = resultado;
+            } else {
+                alert('Por favor, preencha ambos os campos!');
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            darkModeToggle.checked = document.body.classList.contains('dark-mode');
+        }
+    </script>
+</body>
+</html>
