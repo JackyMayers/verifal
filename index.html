@@ -30,7 +30,7 @@
             color: var(--text-color);
         }
 
-        input {
+        input, select {
             margin: 10px;
             padding: 10px;
             font-size: 16px;
@@ -80,6 +80,11 @@
             margin-left: 10px;
             cursor: pointer;
         }
+
+        #extraField {
+            display: none;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body class="dark-mode">
@@ -89,9 +94,19 @@
     </div>
 
     <h1>Perfil e Rumo</h1>
-    <p>Insira o ID do Discord e o rumo desejado:</p>
+    <p>Insira o ID do Discord e selecione o rumo desejado:</p>
     <input type="text" id="discordId" placeholder="Digite o ID do Discord">
-    <input type="text" id="rumo" placeholder="Digite o rumo">
+    <select id="rumos" onchange="toggleExtraField()">
+        <option value="Policia">Polícia</option>
+        <option value="Mecanica">Mecânica</option>
+        <option value="Hospital">Hospital</option>
+        <option value="Ilegal">Ilegal</option>
+        <option value="Livre">Livre</option>
+        <option value="Outro">Outro</option>
+    </select>
+    <div id="extraField">
+        <input type="text" id="customRumo" placeholder="Digite o rumo">
+    </div>
     <button onclick="gerarRumo()">Gerar</button>
     <button id="copiarBtn" onclick="copiarResultado()" disabled>Copiar</button>
     <div id="resultado"></div>
@@ -104,8 +119,10 @@
     <script>
         function gerarRumo() {
             const discordId = document.getElementById('discordId').value;
-            const rumo = document.getElementById('rumo').value;
+            const rumoSelect = document.getElementById('rumos').value;
+            const customRumo = document.getElementById('customRumo').value;
 
+            let rumo = rumoSelect === "Outro" ? customRumo : rumoSelect;
             let resultado = '';
 
             if (discordId) {
@@ -141,6 +158,12 @@
             document.body.classList.toggle('dark-mode');
             const darkModeToggle = document.getElementById('darkModeToggle');
             darkModeToggle.checked = document.body.classList.contains('dark-mode');
+        }
+
+        function toggleExtraField() {
+            const select = document.getElementById("rumos");
+            const extraField = document.getElementById("extraField");
+            extraField.style.display = select.value === "Outro" ? "block" : "none";
         }
     </script>
 </body>
