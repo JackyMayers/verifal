@@ -105,14 +105,24 @@
         function gerarRumo() {
             const discordId = document.getElementById('discordId').value;
             const rumo = document.getElementById('rumo').value;
-            if (discordId && rumo) {
-                const resultado = `${discordId} | <@${discordId}> - ${rumo}`;
+
+            let resultado = '';
+
+            if (discordId) {
+                resultado += `${discordId} | <@${discordId}>`;
+            }
+
+            if (rumo) {
+                resultado += (discordId ? ' - ' : '') + rumo;
+            }
+
+            if (resultado) {
                 document.getElementById('resultado').innerText = resultado;
 
                 // Habilitar o botão de copiar
                 document.getElementById('copiarBtn').disabled = false;
             } else {
-                alert('Por favor, preencha ambos os campos!');
+                alert('Por favor, preencha pelo menos um dos campos!');
             }
         }
 
